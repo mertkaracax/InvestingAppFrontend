@@ -5,9 +5,11 @@ import toastr from "toastr";
 import { Puff } from "react-loader-spinner";
 import Navbar from "../components/Navbar";
 import TransactionModal from "../modals/TransactionModal";
+import { getBaseUrl } from "../api";
 
 const Transactions = () => {
   const navigate = useNavigate();
+  const baseUrl = getBaseUrl();
   const [modalOpen, setModalOpen] = useState(false);
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,7 +17,7 @@ const Transactions = () => {
   const [postListener, setPostListener] = useState(false);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/getTransactions/${username}`)
+    fetch(`${baseUrl}/getTransactions/${username}`)
       .then((res) => res.json())
       .then((data) => {
         setTransactions(data.transactions);

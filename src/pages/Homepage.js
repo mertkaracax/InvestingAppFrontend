@@ -6,9 +6,11 @@ import Navbar from "../components/Navbar";
 import classes from "./Homepage.module.scss";
 import toastr from "toastr";
 import { useEffect, useState } from "react";
+import { getBaseUrl } from "../api";
 
 const Homepage = () => {
   const navigate = useNavigate();
+  const baseUrl = getBaseUrl();
   const [assets, setAssets] = useState([]);
   const [realized, setRealized] = useState(0);
   const [assetPosition, setAssetPosition] = useState(0);
@@ -23,7 +25,7 @@ const Homepage = () => {
   useEffect(() => {
     let interval;
     const fetchData = () => {
-      fetch(`http://127.0.0.1:8000/getAssets/${username}`)
+      fetch(`${baseUrl}/getAssets/${username}`)
         .then((res) => res.json())
         .then((data) => {
           setAssets(data.assets);
@@ -39,7 +41,7 @@ const Homepage = () => {
         .catch((e) => {
           toastr.error(e, "Error");
         });
-      fetch(`http://127.0.0.1:8000/getUser/${username}`)
+      fetch(`${baseUrl}/getUser/${username}`)
         .then((res) => res.json())
         .then((data) => {
           setCapital(data.user.capital);

@@ -2,10 +2,11 @@ import React, { useRef } from "react";
 import classes from "./Signup.module.scss";
 import { useNavigate } from "react-router-dom";
 import toastr from "toastr";
+import { getBaseUrl } from "../api";
 
 const Signup = () => {
   const navigate = useNavigate();
-
+  const baseUrl = getBaseUrl();
   const usernameRef = useRef();
   const passwordRef = useRef();
   const nameRef = useRef();
@@ -18,7 +19,7 @@ const Signup = () => {
     const name = nameRef.current.value;
     const surname = surnameRef.current.value;
 
-    const response = await fetch("http://127.0.0.1:8000/signup", {
+    const response = await fetch("${baseUrl}/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

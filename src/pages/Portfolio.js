@@ -4,15 +4,17 @@ import { useNavigate } from "react-router-dom";
 import toastr from "toastr";
 import { Puff } from "react-loader-spinner";
 import Navbar from "../components/Navbar";
+import { getBaseUrl } from "../api";
 
 const Portfolio = () => {
   const navigate = useNavigate();
+  const baseUrl = getBaseUrl();
   const [assets, setAssets] = useState([]);
   const [loading, setLoading] = useState(true);
   const username = localStorage.getItem("username");
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/getAssets/${username}`)
+    fetch(`${baseUrl}/getAssets/${username}`)
       .then((res) => res.json())
       .then((data) => {
         setAssets(data.assets);

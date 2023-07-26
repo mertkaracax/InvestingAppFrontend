@@ -2,8 +2,10 @@ import classes from "./CapitalModal.module.scss";
 import { Fragment, useRef } from "react";
 import { FaTimes } from "react-icons/fa";
 import toastr from "toastr";
+import { getBaseUrl } from "../api";
 
 const CapitalModal = (props) => {
+  const baseUrl = getBaseUrl();
   const username = localStorage.getItem("username");
   const stockRef = useRef();
   const amountRef = useRef();
@@ -14,7 +16,7 @@ const CapitalModal = (props) => {
     const amount = parseFloat(amountRef.current.value);
     const price = parseFloat(priceRef.current.value);
 
-    fetch(`http://127.0.0.1:8000/addTransaction`, {
+    fetch(`${baseUrl}/addTransaction`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -46,7 +48,7 @@ const CapitalModal = (props) => {
     const amount = parseFloat(amountRef.current.value);
     const price = parseFloat(priceRef.current.value);
 
-    fetch(`http://127.0.0.1:8000/addTransaction`, {
+    fetch(`${baseUrl}/addTransaction`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

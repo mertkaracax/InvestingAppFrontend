@@ -2,8 +2,10 @@ import classes from "./TransactionModal.module.scss";
 import { Fragment, useRef, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import toastr from "toastr";
+import { getBaseUrl } from "../api";
 
 const TransactionModal = (props) => {
+  const baseUrl = getBaseUrl();
   const username = localStorage.getItem("username");
   const stockRef = useRef();
   const amountRef = useRef();
@@ -43,7 +45,7 @@ const TransactionModal = (props) => {
     const amount = parseFloat(amountRef.current.value);
     const price = parseFloat(priceRef.current.value);
 
-    fetch(`http://127.0.0.1:8000/addTransaction`, {
+    fetch(`${baseUrl}/addTransaction`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -75,7 +77,7 @@ const TransactionModal = (props) => {
     const amount = parseFloat(amountRef.current.value);
     const price = parseFloat(priceRef.current.value);
 
-    fetch(`http://127.0.0.1:8000/addTransaction`, {
+    fetch(`${baseUrl}/addTransaction`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

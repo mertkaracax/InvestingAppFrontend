@@ -2,8 +2,10 @@ import React, { useRef, useState } from "react";
 import classes from "./Login.module.scss";
 import { useNavigate } from "react-router-dom";
 import toastr from "toastr";
+import { getBaseUrl } from "../api";
 
 const Login = () => {
+  const baseUrl = getBaseUrl();
   const navigate = useNavigate();
 
   toastr.options = {
@@ -30,7 +32,7 @@ const Login = () => {
     const username = usernameRef.current.value;
     const password = passwordRef.current.value;
     try {
-      const response = await fetch("http://127.0.0.1:8000/login", {
+      const response = await fetch(`${baseUrl}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
