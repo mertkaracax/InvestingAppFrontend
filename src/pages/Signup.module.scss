@@ -1,0 +1,138 @@
+@import "../stylings/BaseStyle.module.scss";
+@import "../stylings/BaseAnimations.scss";
+
+$TITLE_FONTSIZE: 35px;
+$P_COLOR: #e7e6e6ac;
+$P_FONTSIZE: 20px;
+$INPUT_BG_COLOR: #2f2f2f5f;
+
+.body {
+  @include baseBody;
+  @include shineAnimation;
+  overflow: hidden;
+}
+
+.img {
+  position: absolute;
+  opacity: 0.5;
+  left: 0px;
+  bottom: 0px;
+  top: 0px;
+  right: 0px;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+.grid12 {
+  @include baseGrid12;
+}
+
+.grid6-left {
+  @include baseGrid6;
+  @include moveUp;
+  background-color: adjust-hue($color: #0000005f, $degrees: 0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+.grid6-left .h4 {
+  font-size: 35px;
+  color: $COLOR_GOLD;
+  letter-spacing: 2.5px;
+}
+
+.grid6-left .p {
+  margin-top: 2vh;
+  color: $P_COLOR;
+  font-size: $P_FONTSIZE;
+  width: 50%;
+  letter-spacing: 1.5px;
+  text-align: center;
+}
+
+.grid6-right {
+  @include baseGrid6;
+  @include moveDown;
+  background-color: adjust-hue($color: #11111177, $degrees: 0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid6-right .form {
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  height: 65%;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.558);
+}
+
+.grid6-right .form .input {
+  box-sizing: border-box;
+  height: 60px;
+  width: 80%;
+  margin-bottom: 1vh;
+  background-color: $INPUT_BG_COLOR;
+  font-size: 20px;
+  text-align: center;
+  border: none;
+  padding: 15px;
+  color: $P_COLOR;
+  &:focus {
+    outline: none;
+  }
+}
+
+.grid6-right .form .inputBtn {
+  @include baseButton;
+  padding: 15px;
+  height: 70px;
+  width: 80%;
+  font-size: 20px;
+  background-color: $COLOR_GOLD;
+}
+
+.span {
+  margin-top: 3vh;
+  color: $P_COLOR;
+}
+
+.grid6-right .form a {
+  cursor: pointer;
+  color: $COLOR_GOLD;
+  font-weight: 600;
+}
+
+.buttonFacebook {
+  @include baseButton;
+  color: white;
+  background-color: #6666667f;
+  height: 40px;
+  width: 80%;
+  margin-top: 2vh;
+  &:hover {
+    color: white;
+    background-color: #3b5998;
+  }
+}
+
+.buttonGoogle {
+  @include baseButton;
+  color: white;
+  background-color: #6666667f;
+  height: 40px;
+  width: 80%;
+  margin-top: 1vh;
+  &:hover {
+    color: white;
+    background-color: #c3a434;
+  }
+}

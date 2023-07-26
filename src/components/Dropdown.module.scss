@@ -1,0 +1,68 @@
+@import "../stylings/BaseStyle.module.scss";
+
+$itemBg: #1e1e1e;
+
+$menu1AnimSpeed: 300ms;
+$menu2AnimSpeed: 175ms;
+$menu3AnimSpeed: 200ms;
+$menu4AnimSpeed: 300ms;
+$menu5AnimSpeed: 300ms;
+
+.nav__menu {
+  transition: 500ms;
+  z-index: 40;
+  text-align: center;
+  width: 200px;
+  height: 7vh;
+  line-height: 7vh;
+  margin-right: 1vw;
+  background-color: $itemBg;
+  cursor: pointer;
+  &:hover {
+    background-color: darken($itemBg, 2%);
+  }
+  &:hover > .nav__menu-lists li {
+    height: 10vh;
+    display: block;
+    z-index: 50;
+    width: 200px;
+  }
+  // Menu 1
+  @for $i from 1 through 5 {
+    &:hover > .nav__menu--1-lists li:nth-child(#{$i}) {
+      z-index: 50;
+      display: block;
+      font-size: 17px;
+      height: 7vh;
+      width: 200px;
+      color: $P_COLOR;
+      opacity: 0;
+      animation: menu1 ease-in-out forwards;
+      animation-duration: $menu1AnimSpeed;
+      animation-delay: ($menu5AnimSpeed / 2) * ($i - 1);
+      @keyframes menu1 {
+        from {
+          opacity: 0;
+          transform: rotateX(-180deg);
+        }
+        to {
+          opacity: 1;
+          transform: rotateX(0deg);
+        }
+      }
+    }
+  }
+
+  //   .nav__menu-lists {
+  //     perspective: 5000px;
+  //   }
+  .nav__menu-items {
+    display: none;
+    width: 200px;
+    height: 7vh;
+    background-color: $itemBg;
+    &:hover {
+      background-color: darken($itemBg, 10%);
+    }
+  }
+}

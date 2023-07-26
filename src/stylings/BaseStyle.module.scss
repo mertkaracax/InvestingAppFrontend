@@ -1,0 +1,40 @@
+/* MAIN STYLINGS */
+$COLOR_GOLD: #b5964d;
+$TITLE_FONTSIZE: 35px;
+$P_COLOR: #e7e6e6ac;
+$P_FONTSIZE: 20px;
+$INPUT_BG_COLOR: #2f2f2f5f;
+$MODAL_BG_COLOR: #202020;
+
+@mixin baseBody {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+  height: 100vh;
+  width: 100vw;
+  background-color: #232323;
+}
+
+@mixin baseGrid12 {
+  width: 100vw;
+  height: 100%;
+  display: flex;
+}
+
+@mixin baseGrid6 {
+  width: 50%;
+  height: 100%;
+  z-index: 4;
+}
+
+@mixin baseButton {
+  background-color: black;
+  color: white;
+  transition: 700ms;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    background-color: white;
+    color: black;
+  }
+}

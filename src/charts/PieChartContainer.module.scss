@@ -1,0 +1,41 @@
+@import "../stylings/BaseStyle.module.scss";
+
+.container {
+  width: 47vw;
+  height: 55vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.558);
+}
+.header {
+  box-sizing: border-box;
+  height: 5vh;
+  background-color: #343434;
+  color: $P_COLOR;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  width: 100%;
+  display: flex;
+  justify-content: normal;
+  align-items: center;
+  padding-left: 1vw;
+}
+
+.chartContainer {
+  height: 48vh;
+  width: 45vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  justify-content: center;
+}
+
+.chart {
+  height: 39vh;
+  width: 29.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
