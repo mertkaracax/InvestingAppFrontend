@@ -13,8 +13,8 @@
 
 .modal {
   position: fixed;
-  top: 20vh;
-  height: 60vh;
+  top: 30vh;
+  height: 30vh;
   width: 30vw;
   background-color: $MODAL_BG_COLOR;
   border-radius: 10px;
@@ -52,16 +52,16 @@
 }
 
 .modalContent {
-  height: 52vh;
+  height: 22vh;
   width: 30vw;
   display: flex;
   flex-direction: column;
 }
 
 .inputContainer {
-  margin-top: 4vh;
+  margin-top: 0vh;
   width: 30vw;
-  height: 33vh;
+  height: 12vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,7 +78,7 @@
   background-color: lighten($MODAL_BG_COLOR, 4%);
   border-radius: 3px;
   border: none;
-  margin-bottom: 2vh;
+
   color: white;
   &:focus {
     outline: none;
@@ -87,7 +87,7 @@
 
 .btnContainer {
   width: 30vw;
-  height: 8vh;
+  height: 10vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -96,8 +96,8 @@
 .btnBuy {
   box-sizing: border-box;
   font-size: 20px;
-  width: 39%;
-  height: 60px;
+  width: 80%;
+  height: 50px;
   border-radius: 3px;
   background-color: #1f9f5b;
   color: white;
@@ -106,24 +106,6 @@
   cursor: pointer;
   &:hover {
     background-color: darken(#1f9f5b, 5%);
-  }
-  transition: 0.4s;
-}
-
-.btnSell {
-  box-sizing: border-box;
-  font-size: 20px;
-  width: 39%;
-  margin-left: 2%;
-  height: 60px;
-  border-radius: 3px;
-  background-color: #92211b;
-  color: white;
-  border: none;
-  margin-bottom: 1vh;
-  cursor: pointer;
-  &:hover {
-    background-color: darken(#92211b, 5%);
   }
   transition: 0.4s;
 }

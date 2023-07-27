@@ -7,24 +7,17 @@ import { getBaseUrl } from "../api";
 const CapitalModal = (props) => {
   const baseUrl = getBaseUrl();
   const username = localStorage.getItem("username");
-  const stockRef = useRef();
   const amountRef = useRef();
-  const priceRef = useRef();
 
-  const buyHandler = () => {
-    const stock = stockRef.current.value;
+  const submitHandler = () => {
     const amount = parseFloat(amountRef.current.value);
-    const price = parseFloat(priceRef.current.value);
 
-    fetch(`${baseUrl}/addTransaction`, {
+    fetch(`${baseUrl}/increaseCapital`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         username: username,
-        type: "BUY",
-        stockName: stock,
         amount: amount,
-        price: price,
       }),
     })
       .then((res) => res.json())
@@ -32,39 +25,7 @@ const CapitalModal = (props) => {
         console.log(data);
         if (data.success) {
           props.onClose();
-          props.onListen();
-          toastr.success("Your transaction is saved successfully", "Success");
-        } else {
-          toastr.error("Some fields are wrong", "Error");
-        }
-      })
-      .catch((e) => {
-        toastr.error(e, "Error");
-      });
-  };
-
-  const sellHandler = () => {
-    const stock = stockRef.current.value;
-    const amount = parseFloat(amountRef.current.value);
-    const price = parseFloat(priceRef.current.value);
-
-    fetch(`${baseUrl}/addTransaction`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username: username,
-        type: "SELL",
-        stockName: stock,
-        amount: amount,
-        price: price,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          props.onClose();
-          props.onListen();
-          toastr.success("Your transaction is saved successfully", "Success");
+          toastr.success("Your capital is updated successfully", "Success");
         } else {
           toastr.error("Some fields are wrong", "Error");
         }
@@ -79,7 +40,7 @@ const CapitalModal = (props) => {
       <div className={classes.backdrop} onClick={props.onClose}></div>
       <div className={classes.modal}>
         <div className={classes.modalHeader}>
-          <span className={classes.modalHeaderText}>{props.title}</span>
+          <span className={classes.modalHeaderText}>Add Capital</span>
           <FaTimes
             onClick={props.onClose}
             color="#9F9F9F"
@@ -90,30 +51,15 @@ const CapitalModal = (props) => {
         <div className={classes.modalContent}>
           <div className={classes.inputContainer}>
             <input
-              ref={stockRef}
-              className={classes.inp}
-              placeholder="stock"
-              type="text"
-            />
-            <input
               ref={amountRef}
               className={classes.inp}
               placeholder="amount"
               type="text"
             />
-            <input
-              ref={priceRef}
-              className={classes.inp}
-              placeholder="price"
-              type="text"
-            />
           </div>
           <div className={classes.btnContainer}>
-            <button onClick={buyHandler} className={classes.btnBuy}>
-              BUY
-            </button>
-            <button onClick={sellHandler} className={classes.btnSell}>
-              SELL
+            <button onClick={submitHandler} className={classes.btnBuy}>
+              Add
             </button>
           </div>
         </div>

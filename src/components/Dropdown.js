@@ -16,6 +16,10 @@ const Dropdown = () => {
     dispatch(uiActions.toggleCapitalForm());
   };
 
+  const toggleTransactionFormHandler = () => {
+    dispatch(uiActions.toggleTransactionForm());
+  };
+
   return (
     <div className={styles.nav__menu}>
       <div
@@ -35,24 +39,24 @@ const Dropdown = () => {
         className={`${styles["nav__menu-lists"]} ${styles["nav__menu--1-lists"]}`}
       >
         {[
-          "Homepage",
           "Stocks",
           "Transactions",
-          "Increase Capital",
+          "Add Transaction",
+          "Add Capital",
           "Sign out",
         ].map((val, index) => (
           <li
             onClick={() => {
               index === 0
-                ? navigate("/Homepage")
-                : index === 1
                 ? navigate("/Portfolio")
-                : index === 4
-                ? navigate("/")
-                : index === 2
+                : index === 1
                 ? navigate("/Transactions")
+                : index === 2
+                ? toggleTransactionFormHandler()
                 : index === 3
                 ? toggleCapitalFormHandler()
+                : index === 4
+                ? navigate("/")
                 : toastr.error("dropdownda sıkıntı var");
             }}
             key={index}

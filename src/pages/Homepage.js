@@ -15,6 +15,7 @@ const Homepage = () => {
   const [realized, setRealized] = useState(0);
   const [assetPosition, setAssetPosition] = useState(0);
   const [assetsCapital, setAssetsCapital] = useState(0);
+  const [cashPosition, setCashPosition] = useState(0);
   const [capital, setCapital] = useState(0);
   const [totalPnl, setTotalPnl] = useState(0);
   const [pnlPercentage, setPnlPercentage] = useState(0);
@@ -47,6 +48,7 @@ const Homepage = () => {
           setCapital(data.user.capital);
           setRealized(data.user.realized);
           setAssetPosition(data.user.assetPosition);
+          setCashPosition(data.user.cashPosition);
           console.log(data.user);
         })
         .catch((e) => {
@@ -72,11 +74,7 @@ const Homepage = () => {
             value={totalPnl}
             percentage={pnlPercentage}
           />
-          <HomeCard
-            id="3"
-            title="Cash Position"
-            value={capital - assetPosition}
-          />
+          <HomeCard id="3" title="Cash Position" value={cashPosition} />
           <HomeCard
             id="4"
             title="Realized"
@@ -88,7 +86,7 @@ const Homepage = () => {
           <LineChartContainer />
           <PieChartContainer
             assets={assets}
-            cashPosition={capital - assetPosition}
+            cashPosition={cashPosition}
             assetPosition={assetPosition}
           />
         </div>

@@ -118,7 +118,7 @@ const TransactionModal = (props) => {
         onMouseUp={handleMouseUp}
       >
         <div className={classes.modalHeader}>
-          <span className={classes.modalHeaderText}>{props.title}</span>
+          <span className={classes.modalHeaderText}>Add Transaction</span>
           <FaTimes
             onClick={props.onClose}
             color="#9F9F9F"
