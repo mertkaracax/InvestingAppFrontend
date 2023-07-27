@@ -19,7 +19,7 @@ const Signup = () => {
     const name = nameRef.current.value;
     const surname = surnameRef.current.value;
 
-    const response = await fetch("${baseUrl}/signup", {
+    const response = await fetch(`${baseUrl}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
