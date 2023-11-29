@@ -14,30 +14,27 @@ const HomeCard = (props) => {
   }, [props.value]);
 
   let value;
-  console.log("type => ", typeof props.percentage);
   if (props.title === "Realized") {
     value = `${props.value && props.value.toFixed(2)}₺`;
   } else if (props.title === "Portfolio Value") {
-    value =
-      `${typeof props.value !== "undefined" ? props.value.toFixed(0) : "- "}` +
-      "₺";
+    value = `${typeof props.value !== "undefined" ? props.value.toFixed(0) : "- "}` + "₺";
   } else if (props.title === "Total PNL") {
-    if (props.value > 0) {
-      value =
-        `${
-          typeof props.value !== "undefined" ? props.value.toFixed(2) : "- "
-        }` + "₺";
-    } else if (props.value === 0) {
-      value =
-        `${
-          typeof props.value !== "undefined" ? props.value.toFixed(2) : "- "
-        }` + "₺";
-    } else {
-      value =
-        `${
-          typeof props.value !== "undefined" ? props.value.toFixed(2) : "- "
-        }` + "₺";
-    }
+      if (props.value > 0) {
+        value =
+          `${
+            typeof props.value !== "undefined" ? props.value.toFixed(2) : "- "
+          }` + "₺";
+      } else if (props.value === 0) {
+        value =
+          `${
+            typeof props.value !== "undefined" ? props.value.toFixed(2) : "- "
+          }` + "₺";
+      } else {
+        value =
+          `${
+            typeof props.value !== "undefined" ? props.value.toFixed(2) : "- "
+          }` + "₺";
+      }
   } else if (props.title === "Cash Position") {
     value = `${!isNaN(props.value) ? props.value.toFixed(2) : "- "}` + "₺";
   }
@@ -54,7 +51,6 @@ const HomeCard = (props) => {
         {props.title} <br />
         <div
           id={props.id}
-          //   className={`${props.value ? classes.value : ""}`}
           style={{ fontSize: 28, color: "white" }}
         >
           {value}

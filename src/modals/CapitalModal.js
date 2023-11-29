@@ -2,21 +2,19 @@ import classes from "./CapitalModal.module.scss";
 import { Fragment, useRef } from "react";
 import { FaTimes } from "react-icons/fa";
 import toastr from "toastr";
-import { getBaseUrl } from "../api";
+import { base_url } from "../api";
 
 const CapitalModal = (props) => {
-  const baseUrl = getBaseUrl();
   const username = localStorage.getItem("username");
   const amountRef = useRef();
 
   const submitHandler = () => {
     const amount = parseFloat(amountRef.current.value);
 
-    fetch(`${baseUrl}/increaseCapital`, {
-      method: "POST",
+    fetch(`${base_url}/users/${username}/increment_capital`, {
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        username: username,
         amount: amount,
       }),
     })

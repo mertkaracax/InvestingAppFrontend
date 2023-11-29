@@ -2,11 +2,10 @@ import React, { useRef } from "react";
 import classes from "./Signup.module.scss";
 import { useNavigate } from "react-router-dom";
 import toastr from "toastr";
-import { getBaseUrl } from "../api";
+import { base_url } from "../api";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const baseUrl = getBaseUrl();
   const usernameRef = useRef();
   const passwordRef = useRef();
   const nameRef = useRef();
@@ -19,7 +18,7 @@ const Signup = () => {
     const name = nameRef.current.value;
     const surname = surnameRef.current.value;
 
-    const response = await fetch(`${baseUrl}/signup`, {
+    const response = await fetch(`${base_url}/auth/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

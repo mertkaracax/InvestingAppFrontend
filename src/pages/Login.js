@@ -2,10 +2,9 @@ import React, { useRef, useState } from "react";
 import classes from "./Login.module.scss";
 import { useNavigate } from "react-router-dom";
 import toastr from "toastr";
-import { getBaseUrl } from "../api";
+import { base_url } from "../api";
 
 const Login = () => {
-  const baseUrl = getBaseUrl();
   const navigate = useNavigate();
 
   toastr.options = {
@@ -32,7 +31,7 @@ const Login = () => {
     const username = usernameRef.current.value;
     const password = passwordRef.current.value;
     try {
-      const response = await fetch(`${baseUrl}/login`, {
+      const response = await fetch(`${base_url}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +42,6 @@ const Login = () => {
         }),
       });
       const data = await response.json();
-      console.log(data);
       if (data.success) {
         localStorage.setItem("username", data.user.username);
         localStorage.setItem("name", data.user.name);

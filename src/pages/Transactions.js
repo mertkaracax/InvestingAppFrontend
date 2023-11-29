@@ -5,11 +5,10 @@ import toastr from "toastr";
 import { Puff } from "react-loader-spinner";
 import Navbar from "../components/Navbar";
 import TransactionModal from "../modals/TransactionModal";
-import { getBaseUrl } from "../api";
+import { base_url } from "../api";
 
 const Transactions = () => {
   const navigate = useNavigate();
-  const baseUrl = getBaseUrl();
   const [modalOpen, setModalOpen] = useState(false);
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,12 +16,12 @@ const Transactions = () => {
   const [postListener, setPostListener] = useState(false);
 
   useEffect(() => {
-    fetch(`${baseUrl}/getTransactions/${username}`)
+    fetch(`${base_url}/users/${username}/get_transactions`)
       .then((res) => res.json())
       .then((data) => {
-        setTransactions(data.transactions);
-        console.log(data.transactions);
-        if (data.transactions.length === 0) {
+        setTransactions(data);
+        console.log(data);
+        if (data.length === 0) {
           toastr.warning(
             "You have not any transactions in your portfolio",
             "Warning"
@@ -108,8 +107,8 @@ const Transactions = () => {
                     >
                       {item.type}
                     </td>
-                    <td>{item.stockName}</td>
-                    <td>{item.amount}</td>
+                    <td>{item.asset_name}</td>
+                    <td>{item.quantity}</td>
                     <td>{item.price} TL</td>
                     <td
                       style={{

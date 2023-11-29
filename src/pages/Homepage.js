@@ -6,17 +6,15 @@ import Navbar from "../components/Navbar";
 import classes from "./Homepage.module.scss";
 import toastr from "toastr";
 import { useEffect, useState } from "react";
-import { getBaseUrl } from "../api";
+import { base_url } from "../api";
 
 const Homepage = () => {
   const navigate = useNavigate();
-  const baseUrl = getBaseUrl();
   const [assets, setAssets] = useState([]);
-  const [realized, setRealized] = useState(0);
-  const [assetPosition, setAssetPosition] = useState(0);
-  const [assetsCapital, setAssetsCapital] = useState(0);
-  const [cashPosition, setCashPosition] = useState(0);
   const [capital, setCapital] = useState(0);
+  const [assetPosition, setAssetPosition] = useState(0);
+  const [cashPosition, setCashPosition] = useState(0);
+  const [realized, setRealized] = useState(0);
   const [totalPnl, setTotalPnl] = useState(0);
   const [pnlPercentage, setPnlPercentage] = useState(0);
   const [showNumbers, setShowNumbers] = useState(false);
@@ -26,33 +24,27 @@ const Homepage = () => {
   useEffect(() => {
     let interval;
     const fetchData = () => {
-      fetch(`${baseUrl}/getAssets/${username}`)
+      fetch(`${base_url}/users/${username}/get_portfolio`)
         .then((res) => res.json())
         .then((data) => {
-          setAssets(data.assets);
-          setAssetsCapital(data.assetsCapital);
-          setTotalPnl(data.totalPnl);
-          setPnlPercentage(data.pnlPercentage && data.pnlPercentage);
-          console.log(data);
+          console.log(data)
+          setCapital(data.user.capital)
+          setTotalPnl(data.user.total_pnl)
+          setPnlPercentage(data.user.total_pnl / data.user.capital * 100)
+          setRealized(data.user.realized)
+          setAssetPosition(data.user.asset_position)
+          setCashPosition(data.user.cash_position)
           if (data.assets.length === 0) {
             toastr.info("You have not any asset", "info");
             clearInterval(interval); // Hata durumunda aralığı temizleyelim.
           }
+          else {
+            setAssets(data.assets);
+          }
         })
         .catch((e) => {
           toastr.error(e, "Error");
-        });
-      fetch(`${baseUrl}/getUser/${username}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setCapital(data.user.capital);
-          setRealized(data.user.realized);
-          setAssetPosition(data.user.assetPosition);
-          setCashPosition(data.user.cashPosition);
-          console.log(data.user);
-        })
-        .catch((e) => {
-          toastr.error(e, "Error");
+          clearInterval(interval); // Hata durumunda aralığı temizleyelim.
         });
     };
     interval = setInterval(fetchData, 1000);
@@ -61,7 +53,7 @@ const Homepage = () => {
       clearInterval(interval);
     };
   }, []);
-  console.log(capital + totalPnl);
+
   return (
     <div className={classes.body}>
       <Navbar />

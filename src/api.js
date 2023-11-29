@@ -1,15 +1,1 @@
-class Api {
-  constructor(BASE_URL) {
-    this.BASE_URL = BASE_URL;
-  }
-}
-
-//"https://y2hpu3ursk.execute-api.us-east-1.amazonaws.com/api"
-
-const baseUrl = new Api(
-  "https://y2hpu3ursk.execute-api.us-east-1.amazonaws.com/api"
-);
-
-export const getBaseUrl = () => {
-  return baseUrl.BASE_URL;
-};
+export const base_url="http://127.0.0.1:8000"

@@ -46,6 +46,15 @@ function LineChartContainer() {
       title: {
         display: false,
       },
+      datalabels: {
+        formatter: function(value, context) {
+          return context.chart.data.labels[context.dataIndex];
+        },
+        color: "transparent",
+        font: {
+          weight: 'normal',
+        }
+      }
     },
   };
 

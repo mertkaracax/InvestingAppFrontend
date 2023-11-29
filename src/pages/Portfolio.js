@@ -4,17 +4,16 @@ import { useNavigate } from "react-router-dom";
 import toastr from "toastr";
 import { Puff } from "react-loader-spinner";
 import Navbar from "../components/Navbar";
-import { getBaseUrl } from "../api";
+import { base_url } from "../api";
 
 const Portfolio = () => {
   const navigate = useNavigate();
-  const baseUrl = getBaseUrl();
   const [assets, setAssets] = useState([]);
   const [loading, setLoading] = useState(true);
   const username = localStorage.getItem("username");
 
   useEffect(() => {
-    fetch(`${baseUrl}/getAssets/${username}`)
+    fetch(`${base_url}/users/${username}/get_portfolio`)
       .then((res) => res.json())
       .then((data) => {
         setAssets(data.assets);
@@ -54,11 +53,11 @@ const Portfolio = () => {
           <thead>
             <tr>
               <td>STOCK</td>
-              <td>QUANTITY</td>
               <td>AVERAGE COST</td>
-              <td>TOTAL VALUE</td>
+              <td>PRICE</td>
+              <td>QUANTITY</td>
+              <td>CURRENT VALUE</td>
               <td>GAIN / LOSS</td>
-              <td>CLOSE</td>
             </tr>
           </thead>
           <tbody
@@ -72,15 +71,15 @@ const Portfolio = () => {
               assets.length > 0 &&
               assets.map((item) => {
                 return (
-                  <tr key={item.assetName}>
-                    <td>{item.assetName}</td>
-                    <td>{item.totalAmount}</td>
-                    <td>{item.avgBuyPrice.toFixed(2)} TL</td>
-                    <td>{item.totalValue.toFixed(0)} TL</td>
+                  <tr key={item.asset_name}>
+                    <td style={{borderLeft: item.recommendation == "BUY" ? "5px solid green" : item.recommendation == "SELL" ? "5px solid red" : "5px solid white"}}>{item.asset_name}</td>
+                    <td>{item.average_cost.toFixed(2)} TL</td>
+                    <td>{item.close.toFixed(2)} <span className={classes.percantage} style={{color: item.daily_change_rate > 0 ? "rgb(71, 230, 78)" : "rgb(230, 88, 71)"}}>%{item.daily_change_rate.toFixed(2)}</span></td>
+                    <td>{item.quantity}</td>
+                    <td>{item.total_value.toFixed(0)} TL <span className={classes.percantage} style={{color: item.pnl_percantage > 0 ? "rgb(71, 230, 78)" : "rgb(230, 88, 71)"}}>{item.pnl_percantage.toFixed(2)}%</span></td>
                     <td style={{ color: item.pnl > 0 ? "#47E64E" : "#E65847" }}>
                       {item.pnl.toFixed(2)} TL
                     </td>
-                    <td>{item.close}</td>
                   </tr>
                 );
               })}

@@ -2,23 +2,24 @@ import React, { useState, useEffect } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import classes from "./PieChartContainer.module.scss";
-import "chartjs-plugin-datalabels";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import autocolors from 'chartjs-plugin-autocolors';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend, autocolors, ChartDataLabels);
 
 export const PieChartContainer = (props) => {
   const data = {
-    labels: props.assets && props.assets.map((item) => item.assetName),
+    labels: props.assets && props.assets.map((item) => item.asset_name),
     datasets: [
       {
-        label: "Piyasa Değeri",
-        data: props.assets && props.assets.map((item) => item.totalValue),
+        label: "Investment Amount",
+        data: props.assets && props.assets.map((item) => item.average_cost * item.quantity),
         backgroundColor: [
-          "#888888",
-          "#C1C1C1",
-          "#7C614B",
-          "#515151",
-          "#BAA998",
+          "#5E5D5A",
+          "#787774",
+          "#545351",
+          "#393735",
+          "#636260",
         ],
         borderColor: "transparent",
         borderWidth: 1,
@@ -27,12 +28,12 @@ export const PieChartContainer = (props) => {
   };
 
   const dataCash = {
-    labels: ["Cash", "Stock"],
+    labels: ["CASH", "ASSET"],
     datasets: [
       {
-        label: "Percentage",
+        label: "Position Amount",
         data: [props.cashPosition, props.assetPosition],
-        backgroundColor: ["#515151", "#BAA998"],
+        backgroundColor: ["#393735", "#636260"],
         borderColor: "transparent",
         borderWidth: 1,
       },
@@ -52,8 +53,21 @@ export const PieChartContainer = (props) => {
                   },
                   title: {
                     display: true,
-                    text: "Stocks",
+                    text: "Assets",
+                    color: "#b5964d",
                   },
+                  autocolors: {
+                    enabled: false
+                  },
+                  datalabels: {
+                    formatter: function(value, context) {
+                      return context.chart.data.labels[context.dataIndex];
+                    },
+                    color: "white",
+                    font: {
+                      weight: 'normal',
+                    }
+                  }
                 },
               }}
               data={data}
@@ -76,10 +90,14 @@ export const PieChartContainer = (props) => {
                   position: "top",
                 },
                 datalabels: {
-                  color: "white", // Labelların yazı rengi
-                  anchor: "end", // Labelların nerede konumlanacağı (start, center, end)
-                  align: "end", // Labelların dilimin neresine göre hizalanacağı (start, center, end)
-                },
+                  formatter: function(value, context) {
+                    return context.chart.data.labels[context.dataIndex];
+                  },
+                  color: "white",
+                  font: {
+                    weight: 'normal',
+                  }
+                }
               },
             }}
             data={dataCash}

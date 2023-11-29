@@ -2,10 +2,9 @@ import classes from "./TransactionModal.module.scss";
 import { Fragment, useRef, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import toastr from "toastr";
-import { getBaseUrl } from "../api";
+import { base_url } from "../api";
 
 const TransactionModal = (props) => {
-  const baseUrl = getBaseUrl();
   const username = localStorage.getItem("username");
   const stockRef = useRef();
   const amountRef = useRef();
@@ -45,14 +44,14 @@ const TransactionModal = (props) => {
     const amount = parseFloat(amountRef.current.value);
     const price = parseFloat(priceRef.current.value);
 
-    fetch(`${baseUrl}/addTransaction`, {
+    fetch(`${base_url}/trade/add_transaction`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         username: username,
         type: "BUY",
-        stockName: stock,
-        amount: amount,
+        asset_name: stock,
+        quantity: amount,
         price: price,
       }),
     })
@@ -77,14 +76,14 @@ const TransactionModal = (props) => {
     const amount = parseFloat(amountRef.current.value);
     const price = parseFloat(priceRef.current.value);
 
-    fetch(`${baseUrl}/addTransaction`, {
+    fetch(`${base_url}/trade/add_transaction`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         username: username,
         type: "SELL",
-        stockName: stock,
-        amount: amount,
+        asset_name: stock,
+        quantity: amount,
         price: price,
       }),
     })
